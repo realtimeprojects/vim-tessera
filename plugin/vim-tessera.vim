@@ -1,4 +1,4 @@
-com! -b -nargs=* Alist :py vim-tessera.
+com! -b -nargs=* Alist :py vimtessera.list()
 
 if !has('python')
     echoe 'vim-radish No python support available.'
