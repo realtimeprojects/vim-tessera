@@ -6,6 +6,6 @@ from vim import current, buffers
 def list():
     """ clean radish highlights in current buffer
     """
-    files = glob.glob("tessera")
+    files = glob.glob(".tesserae/*/tessera")
     print("files: %s" % files)
 
