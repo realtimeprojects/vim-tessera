@@ -1,4 +1,5 @@
-com! -b -nargs=* Alist :py vimtessera.list()
+com! -b -nargs=* Alist :py print("\n".join(tessera.list()))
+com! -b -nargs=* Anext :py tessera.next()
 
 if !has('python')
     echoe 'vim-radish No python support available.'
@@ -13,6 +14,7 @@ if !exists('s:vimtessera_loaded')
     exe 'python sys.path = ["' . s:plugin_path . '/.."] + sys.path'
 
     python import vimtessera
+    python tessera = vimtessera.tessera()
 
     let s:vimradish_loaded = 1
 endif
