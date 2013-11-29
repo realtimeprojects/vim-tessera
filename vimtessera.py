@@ -1,18 +1,19 @@
 
 import glob
 import vim
+from tessera import GitTessera
 from vim import current, buffers
 
 class tessera:
     def __init__(self, directory = "."):
         self.directory = directory
+        self.te = GitTessera()
 
     def list(self):
-        """ clean radish highlights in current buffer
-        """
-        self.files = glob.glob(".tesserae/*/tessera")
+        self.files = self.te.ls()
         self.index = 0
-        return self.files
+        for t in self.files:
+            print(t.data())
 
     def next(self):
         vim.command(":e %s" % self.files[self.index])

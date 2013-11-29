@@ -1,5 +1,5 @@
-com! -b -nargs=* Alist :py print("\n".join(tessera.list()))
-com! -b -nargs=* Anext :py tessera.next()
+com! -b -nargs=* TElist :py tessera.list()
+com! -b -nargs=* TEnext :py tessera.next()
 
 if !has('python')
     echoe 'vim-radish No python support available.'
