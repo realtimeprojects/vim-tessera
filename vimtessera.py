@@ -4,6 +4,12 @@ import vim
 from tessera import GitTessera
 from vim import current, buffers
 
+def _highlight():
+    vim.command(":hi def TEid ctermfg=darkblue")
+    vim.command(":hi def TEtitle ctermfg=darkgreen")
+    vim.command(":syn match TEid '^[^ ]\+'")
+    vim.command(":syn match TEtitle ' .\+$'")
+
 class tessera:
     def __init__(self, directory = "."):
         self.directory = directory
@@ -16,8 +22,9 @@ class tessera:
         for t in self.files:
             ident = t.ident()
             vim.current.buffer.append("%s %s" % ( ident['ident'], ident['title'] ) )
-        vim.command(":set nomodifiable")
         vim.command(":w")
+        vim.command(":set nomodifiable")
+        _highlight()
         vim.command(":nmap <Enter> :py tessera.open()<Enter>")
 
     def next(self):
