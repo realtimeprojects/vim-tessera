@@ -18,7 +18,7 @@ class tessera:
             vim.current.buffer.append("%s %s" % ( ident['ident'], ident['title'] ) )
         vim.command(":set nomodifiable")
         vim.command(":w")
-        vim.command(":nmap  :py tessera.open()")
+        vim.command(":nmap <Enter> :py tessera.open()<Enter>")
 
     def next(self):
         vim.command(":e %s" % self.files[self.index])
@@ -28,5 +28,5 @@ class tessera:
         (row, col) = vim.current.window.cursor
         vim.command(":e %s" % self.files[ row - 2 ].filename)
         vim.command(":set nomodifiable")
-        vim.command(":nmap q :bd<CR>")
+        vim.command(":nmap q :bd<Enter>")
 
