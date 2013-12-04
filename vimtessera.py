@@ -1,8 +1,11 @@
 
 import glob
+import os
 import vim
+
 from tessera import GitTessera
 from vim import current, buffers
+from ConfigParser import ConfigParser
 
 def _highlight():
     vim.command(":hi def TEid ctermfg=darkblue")
@@ -13,7 +16,10 @@ def _highlight():
 class tessera:
     def __init__(self, directory = "."):
         self.directory = directory
-        self.te = GitTessera()
+        config = ConfigParser()
+        src = os.path.join(os.path.dirname(os.path.realpath(__file__)), "vimtessera.config")
+        config.read(src)
+        self.te = GitTessera(config)
 
     def list(self):
         self.files = self.te.ls()
