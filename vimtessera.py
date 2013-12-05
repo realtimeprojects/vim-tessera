@@ -3,17 +3,17 @@ import glob
 import os
 import vim
 
-from tessera import GitTessera
+from tessera import GitTessera, Tessera
 from vim import current, buffers
 from ConfigParser import ConfigParser
 
 class tessera:
     def __init__(self, directory = "."):
-        self.directory = directory
+        self._tesserae = os.path.relpath(os.path.join(directory, ".tesserae"))
         config = ConfigParser()
-        src = os.path.join(os.path.dirname(os.path.realpath(__file__)), "vimtessera.config")
-        config.read(src)
+        config.read(os.path.join(self._tesserae, "config"))
         self.te = GitTessera(config)
+        self.t = None
 
     def list(self):
         self.files = self.te.ls()
@@ -32,6 +32,16 @@ class tessera:
         vim.command(":set nomodifiable")
         vim.command(":nmap q :bd<Enter>")
 
+    def create(self):
+        Tessera._tesserae = self._tesserae
+        self.t = self.te.create()
+        vim.command(":e " + self.t.filename)
+
+    def commit(self):
+        if self.t is None:
+            return
+        vim.command(":w")
+        self.te.commit(self.t)
 
 def _highlight():
     vim.command(":hi def TEid ctermfg=darkblue")
