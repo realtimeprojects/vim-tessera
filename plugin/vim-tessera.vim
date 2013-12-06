@@ -1,6 +1,6 @@
 com! -b -nargs=* Alist :py tessera.list()
 com! -b -nargs=* Anext :py tessera.next()
-com! -b -nargs=* Acreate :py tessera.create()
+com! -b -nargs=* Acreate :py tessera.create(title="<args>")
 com! -b -nargs=* Awrite :py tessera.commit()
 
 if !has('python')

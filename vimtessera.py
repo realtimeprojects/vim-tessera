@@ -32,9 +32,9 @@ class tessera:
         vim.command(":set nomodifiable")
         vim.command(":nmap q :bd<Enter>")
 
-    def create(self):
+    def create(self, title):
         Tessera._tesserae = self._tesserae
-        self.t = self.te.create()
+        self.t = self.te.create() if title is "" else self.te.create(title)
         vim.command(":e " + self.t.filename)
 
     def commit(self):
