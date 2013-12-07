@@ -3,15 +3,14 @@ import glob
 import os
 import vim
 
-from tessera import GitTessera, Tessera
+from tessera import GitTessera, Tessera, TesseraConfig
 from vim import current, buffers
 from ConfigParser import ConfigParser
 
 class tessera:
     def __init__(self, directory = "."):
         self._tesserae = os.path.relpath(os.path.join(directory, ".tesserae"))
-        config = ConfigParser()
-        config.read(os.path.join(self._tesserae, "config"))
+        config = TesseraConfig(os.path.join(self._tesserae, "config"))
         self.te = GitTessera(config)
         self.t = None
 
