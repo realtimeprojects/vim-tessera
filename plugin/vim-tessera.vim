@@ -21,3 +21,4 @@ if !exists('s:vimtessera_loaded')
     let s:vimradish_loaded = 1
 endif
 
+au BufEnter,BufNew tessera setf tessera
