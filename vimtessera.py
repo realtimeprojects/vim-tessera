@@ -38,8 +38,12 @@ class tessera:
           return
         (row, col) = vim.current.window.cursor
         vim.command(":e %s" % self.files[ row - (len(_headline) + 1) ].filename)
-        vim.command(":set nomodifiable")
-        vim.command(":nmap q :bd<Enter>")
+        vim.command(":au BufDelete <buffer> :py tessera.check()")
+
+    def check(self):
+        if vim.current.buffer.options["modified"] == "modified":
+            vim.command(":confirm q")
+
 
     def create(self, title):
         if not self.te:
