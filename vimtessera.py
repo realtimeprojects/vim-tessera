@@ -71,6 +71,7 @@ _headline = [ "# Welcome to vim-tessera",
 def _display(files):
     """ displays the {files} Tesserae in the current buffer
     """
+    vim.command(":set modifiable")
     del vim.current.buffer[0:len(vim.current.buffer)]
     vim.current.buffer[0:len(_headline)] = _headline
     for t in files:
